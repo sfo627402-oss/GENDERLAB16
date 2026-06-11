@@ -8,6 +8,10 @@ services:
         value: production
       - key: APP_DEBUG
         value: false
+      - key: APP_URL
+        value: https://genderlab02.onrender.com
+      - key: ASSET_URL
+        value: https://genderlab02.onrender.com
       - key: APP_KEY
         value: base64:pwUdpUP9jxkOR0qMT4GeulW71vtBEUsUExEkMsAiEuE=
       - key: LOG_CHANNEL
