@@ -33,11 +33,11 @@ COPY . .
 # Installer les dépendances Laravel
 RUN composer install --no-dev --optimize-autoloader
 
-# Installer les dépendances Node et build les assets
-RUN npm install && npm run build
-
 # Préparer le fichier .env et générer la clé
 RUN cp .env.example .env && php artisan key:generate
+
+# Installer les dépendances Node (build will happen at runtime with correct env vars)
+RUN npm install
 
 # S'assurer que la base sqlite existe
 RUN mkdir -p database && touch database/database.sqlite && chmod 777 database/database.sqlite
@@ -58,4 +58,4 @@ RUN printf "<Directory ${APACHE_DOCUMENT_ROOT}>\n\
     && a2enconf laravel
 
 EXPOSE 80
-CMD rm -rf public/storage && php artisan storage:link && php artisan migrate --force && php artisan db:seed --force && apache2-foreground
+CMD rm -rf public/storage && npm run build && php artisan storage:link && php artisan migrate --force && php artisan db:seed --force && apache2-foreground
