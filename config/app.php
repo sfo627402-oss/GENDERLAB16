@@ -52,7 +52,20 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://genderlab02.onrender.com'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Asset URL
+    |--------------------------------------------------------------------------
+    |
+    | This URL is used by the asset helper to generate absolute URLs when
+    | assets are served from a separate domain or CDN. Set this to the URL
+    | of your asset host when required.
+    |
+    */
+
+    'asset_url' => env('ASSET_URL', env('APP_URL', 'https://genderlab02.onrender.com')),
 
     /*
     |--------------------------------------------------------------------------
