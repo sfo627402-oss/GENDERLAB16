@@ -5,9 +5,8 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
-                        <img src="{{ asset('images/logo.png') }}" alt="GenDer Lab Logo" class="h-16 w-auto">
-                        <span class="font-outfit font-black text-xl text-slate-900 tracking-tight">GenDer Lab</span>
+                    <a href="{{ route('dashboard') }}" class="flex items-center">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-16 w-auto">
                     </a>
                 </div>
 

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'GenDer Lab') }} — Authentification</title>
+        <title>Authentification</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,11 +18,10 @@
     <body class="font-inter antialiased hero-bg min-h-screen flex items-center justify-center p-6 sm:p-0">
         <div class="w-full sm:max-w-md">
             <div class="text-center mb-10">
-                <a href="/" class="inline-flex items-center gap-3">
-                    <img src="{{ asset('images/logo.png') }}" alt="GenDer Lab Logo" class="h-28 w-auto">
+                <a href="/" class="inline-flex items-center">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-28 w-auto">
                 </a>
-                <h1 class="mt-4 font-outfit font-black text-2xl text-white">GenDer Lab</h1>
-                <p class="text-white/40 text-sm mt-1 uppercase tracking-widest font-bold">Molecular Bird Sexing</p>
+                <p class="text-white/40 text-sm mt-4 uppercase tracking-widest font-bold">Molecular Bird Sexing</p>
             </div>
 
             <div class="glass rounded-[2rem] p-8 sm:p-10 shadow-2xl relative overflow-hidden">
@@ -33,7 +32,7 @@
             </div>
             
             <p class="text-center mt-8 text-white/30 text-xs">
-                © {{ date('Y') }} GenDer Lab. Tous droits réservés.
+                © {{ date('Y') }}. Tous droits réservés.
             </p>
         </div>
     </body>

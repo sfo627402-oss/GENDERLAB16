@@ -31,4 +31,20 @@ class AdminController extends Controller
 
         return view('admin.index', compact('stats', 'recent_users', 'recent_samples', 'status_dist'));
     }
+
+    public function toggleClientAccess(Request $request, $id)
+    {
+        $sample = Sample::findOrFail($id);
+        $sample->update(['client_access_granted' => !$sample->client_access_granted]);
+
+        return back()->with('success', 'L’accès client a été mis à jour pour cet échantillon.');
+    }
+
+    public function destroySample(Request $request, $id)
+    {
+        $sample = Sample::findOrFail($id);
+        $sample->delete();
+
+        return back()->with('success', 'Échantillon supprimé avec succès.');
+    }
 }

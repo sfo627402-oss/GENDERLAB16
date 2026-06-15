@@ -20,7 +20,7 @@
                             <span class="text-emerald-400 font-black text-[10px] bg-emerald-400/10 border border-emerald-400/20 px-3 py-1 rounded-full uppercase tracking-widest">+{{ $stats['growth'] }}%</span>
                         </div>
                         <p class="mb-1 text-[10px] font-black text-white/40 uppercase tracking-[0.2em]">Flux Financier Brut</p>
-                        <p class="text-4xl font-black font-outfit tracking-tight">{{ number_format($stats['revenue'], 2) }} €</p>
+                        <p class="text-4xl font-black font-outfit tracking-tight">{{ number_format($stats['revenue'], 2) }} DZD</p>
                     </div>
                 </div>
 
@@ -140,6 +140,64 @@
                             </li>
                             @endforeach
                         </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Access Control -->
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-[3rem] border border-slate-100">
+                <div class="p-10 border-b border-slate-50 flex justify-between items-center bg-slate-50/30">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-emerald-600 p-3 rounded-2xl text-white shadow-lg shadow-emerald-600/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 01-6 0 3 3 0 016 0zm-8 8a8 8 0 0116 0H7z"></path></svg>
+                        </div>
+                        <h3 class="font-black font-outfit text-xl text-slate-900 uppercase italic tracking-tight">Gestion de l’accès client</h3>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-slate-200">
+                            <thead class="bg-slate-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider text-slate-400">Échantillon</th>
+                                    <th class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider text-slate-400">Client</th>
+                                    <th class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider text-slate-400">Statut</th>
+                                    <th class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider text-slate-400">Accès</th>
+                                    <th class="px-6 py-3 text-right text-xs font-black uppercase tracking-wider text-slate-400">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-slate-100">
+                                @foreach($recent_samples as $s)
+                                <tr>
+                                    <td class="px-6 py-4 text-sm font-black text-slate-900">#{{ $s->id }}</td>
+                                    <td class="px-6 py-4 text-sm text-slate-500">{{ $s->user->name }}</td>
+                                    <td class="px-6 py-4 text-sm uppercase tracking-widest font-black text-slate-900">{{ $s->status }}</td>
+                                    <td class="px-6 py-4 text-sm">
+                                        <span class="inline-flex items-center px-3 py-2 rounded-full text-[10px] font-black uppercase tracking-widest {{ $s->client_access_granted ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-orange-50 text-orange-800 border border-orange-200' }}">
+                                            {{ $s->client_access_granted ? 'Accès activé' : 'Accès désactivé' }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <div class="inline-flex items-center gap-2 justify-end">
+                                            <form action="{{ route('admin.sample.access', $s->id) }}" method="POST" class="inline-block">
+                                                @csrf
+                                                <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-[10px] font-black uppercase tracking-widest text-white {{ $s->client_access_granted ? 'bg-slate-900 hover:bg-indigo-600' : 'bg-emerald-900 hover:bg-emerald-600' }} transition">
+                                                    {{ $s->client_access_granted ? 'Révoquer' : 'Autoriser' }}
+                                                </button>
+                                            </form>
+                                            <form action="{{ route('admin.sample.destroy', $s->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Supprimer cet échantillon ? Cette action est irréversible.');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-[10px] font-black uppercase tracking-widest text-white bg-rose-600 hover:bg-rose-500 transition">
+                                                    Supprimer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -77,8 +77,8 @@
                                     <div class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></div>
                                 </div>
                                 <div class="p-4 bg-slate-100">
-                                    <a href="{{ Storage::url($sample->pre_scan_image_path) }}" target="_blank" class="block relative overflow-hidden rounded-2xl">
-                                        <img src="{{ Storage::url($sample->pre_scan_image_path) }}" alt="Photo Client" class="w-full h-auto transform group-hover:scale-105 transition duration-700 grayscale hover:grayscale-0">
+                                    <a href="{{ asset('storage/' . $sample->pre_scan_image_path) }}" target="_blank" class="block relative overflow-hidden rounded-2xl">
+                                        <img src="{{ asset('storage/' . $sample->pre_scan_image_path) }}" alt="Photo Client" class="w-full h-auto transform group-hover:scale-105 transition duration-700 grayscale hover:grayscale-0">
                                     </a>
                                 </div>
                             </div>
@@ -134,40 +134,28 @@
                             @csrf
 
                             <div class="space-y-4">
-                                <label class="block text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">Paiement demandé</label>
-                                <div class="flex gap-3 flex-wrap">
-                                    <label class="inline-flex items-center gap-3 bg-slate-50 px-4 py-3 rounded-2xl border border-slate-200 text-[10px] uppercase font-black tracking-widest">
-                                        <input type="radio" name="payment_required" value="1" {{ old('payment_required', $sample->payment_required) ? 'checked' : '' }} class="h-4 w-4 text-indigo-600" />
-                                        À payer
-                                    </label>
-                                    <label class="inline-flex items-center gap-3 bg-slate-50 px-4 py-3 rounded-2xl border border-slate-200 text-[10px] uppercase font-black tracking-widest">
-                                        <input type="radio" name="payment_required" value="0" {{ !old('payment_required', $sample->payment_required) ? 'checked' : '' }} class="h-4 w-4 text-emerald-600" />
-                                        Gratuit
-                                    </label>
-                                </div>
-                                <p class="text-[10px] text-slate-500 uppercase tracking-[0.2em] mt-2">Choisissez si le client doit encore payer ou si l’analyse est offerte.</p>
+                                <label class="block text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">Paiement désactivé</label>
+                                <p class="text-[10px] text-slate-500 uppercase tracking-[0.2em] mt-2">Le prélèvement est traité sans facturation à la livraison.</p>
                             </div>
 
                             <!-- Dropzone Style Upload -->
                             <div>
                                 <label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Résultat Visuel (Gel Electrophorèse)</label>
-                                <div class="relative group/zone">
+                                <label for="gel_image" class="relative group/zone block cursor-pointer">
+                                    <input id="gel_image" name="gel_image" type="file" class="sr-only" accept="image/*">
                                     <div class="absolute inset-0 bg-indigo-600/5 rounded-[2rem] border-2 border-indigo-200 border-dashed group-hover/zone:border-indigo-400 group-hover/zone:bg-indigo-600/10 transition-all duration-300"></div>
-                                    <div class="relative px-8 py-12 flex flex-col items-center justify-center text-center cursor-pointer">
+                                    <div class="relative px-8 py-12 flex flex-col items-center justify-center text-center">
                                         <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg mb-6 group-hover/zone:scale-110 transition duration-500">
                                             <svg class="h-8 w-8 text-indigo-600" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                                 <path d="M12 4v16m8-8H4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                         </div>
                                         <div class="space-y-2">
-                                            <label for="gel_image" class="relative cursor-pointer">
-                                                <span class="text-sm font-black text-slate-900 uppercase tracking-tight">Déposer le Cliché</span>
-                                                <input id="gel_image" name="gel_image" type="file" class="sr-only" accept="image/*">
-                                            </label>
-                                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">TIFF, PNG or RAW max 5MB</p>
+                                            <span class="text-sm font-black text-slate-900 uppercase tracking-tight">Déposer le Cliché</span>
+                                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">JPG, JPEG, PNG, GIF, TIFF max 5MB</p>
                                         </div>
                                     </div>
-                                </div>
+                                </label>
                                 @if(optional($sample->result)->gel_image_path)
                                     <p class="text-[10px] font-black text-emerald-600 mt-4 flex items-center gap-2 uppercase tracking-widest">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>

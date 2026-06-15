@@ -22,12 +22,26 @@ class ClientController extends Controller
             'species_id' => 'required|exists:species,id',
             'sample_type' => 'required|in:feather,blood',
             'quantity' => 'required|integer|min:1',
-            'pre_scan_image' => 'nullable|image|max:2048'
+            'delivery_method' => 'required|in:courier,dropoff',
+            'pre_scan_image' => 'sometimes|file|max:2048'
         ]);
 
         $imagePath = null;
         if ($request->hasFile('pre_scan_image')) {
-            $imagePath = $request->file('pre_scan_image')->store('pre_scans', 'public');
+            $file = $request->file('pre_scan_image');
+            if ($file && $file->isValid() && $file->getSize() > 0) {
+                $extension = strtolower($file->getClientOriginalExtension());
+                if (!in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) {
+                    return back()->withErrors(['pre_scan_image' => 'Le fichier doit être une image JPG, JPEG, PNG ou GIF.'])->withInput();
+                }
+                $filename = uniqid('pre_scan_', true) . '.' . $extension;
+                $storagePath = storage_path('app/public/pre_scans');
+                if (!file_exists($storagePath)) {
+                    mkdir($storagePath, 0755, true);
+                }
+                $file->move($storagePath, $filename);
+                $imagePath = 'pre_scans/' . $filename;
+            }
         }
 
         $sample = Sample::create([
@@ -38,6 +52,7 @@ class ClientController extends Controller
             'notes' => $request->notes,
             'qr_code' => Str::uuid()->toString(),
             'status' => 'Pending',
+            'payment_required' => false,
             'pre_scan_image_path' => $imagePath,
         ]);
 
@@ -50,19 +65,11 @@ class ClientController extends Controller
             ->with(['species', 'result'])
             ->findOrFail($id);
 
-        // If a result exists and the sample is completed, make sure the client can see it.
         if ($sample->status === 'Completed' && $sample->result) {
             $sample->load('result.biologist');
         }
 
         return view('client.sample_show', compact('sample'));
-    }
-
-    public function simulatePayment($id)
-    {
-        $sample = Sample::where('user_id', Auth::id())->findOrFail($id);
-        $sample->update(['is_paid' => true]);
-        return back()->with('success', 'Payment successful. You can now view the full results.');
     }
 
     public function instructionsPage()
@@ -78,8 +85,8 @@ class ClientController extends Controller
             abort(403, 'Report not available until the analysis is completed.');
         }
 
-        if ($sample->payment_required && !$sample->is_paid) {
-            abort(403, 'Report not available until payment is completed.');
+        if (!$sample->client_access_granted) {
+            abort(403, 'Report not available until the administrator grants access.');
         }
 
         return view('client.pdf', compact('sample'));

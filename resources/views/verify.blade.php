@@ -84,34 +84,60 @@
                 <!-- Result Area -->
                 <div class="pt-10 border-t border-white/10">
                     @if($sample->status === 'Completed' && $sample->result)
-                        <div class="text-center py-10 bg-indigo-500/5 rounded-[2.5rem] border border-indigo-500/20 relative overflow-hidden group/result">
-                            <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-transparent"></div>
-                            <p class="text-white/40 text-[9px] font-black uppercase tracking-[0.3em] mb-8 relative z-10">DIAGNOSTIC TERMINAL</p>
-                            
-                            <div class="relative z-10 mb-8">
-                                @if($sample->result->sex_result == 'Male')
-                                    <div class="inline-flex w-24 h-24 bg-indigo-600 rounded-full items-center justify-center text-white text-5xl shadow-[0_0_50px_rgba(79,70,229,0.4)] font-black">♂</div>
-                                    <h3 class="mt-6 text-white font-outfit font-black text-5xl tracking-tighter uppercase italic italic">H_MASCULIN</h3>
-                                @elseif($sample->result->sex_result == 'Female')
-                                    <div class="inline-flex w-24 h-24 bg-pink-500 rounded-full items-center justify-center text-white text-5xl shadow-[0_0_50px_rgba(236,72,153,0.4)] font-black">♀</div>
-                                    <h3 class="mt-6 text-white font-outfit font-black text-5xl tracking-tighter uppercase italic italic">H_FÉMININ</h3>
-                                @else
-                                    <div class="inline-flex w-24 h-24 bg-slate-700 rounded-full items-center justify-center text-white text-5xl font-black">?</div>
-                                    <h3 class="mt-6 text-slate-400 font-outfit font-black text-4xl tracking-tighter uppercase italic italic">INC_NULL</h3>
-                                @endif
-                            </div>
+                        @if($sample->client_access_granted)
+                            <div class="text-center py-10 bg-emerald-500/10 rounded-[2.5rem] border border-emerald-500/20 relative overflow-hidden group/result">
+                                <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent"></div>
+                                <p class="text-emerald-900/40 text-[9px] font-black uppercase tracking-[0.3em] mb-8 relative z-10">RAPPORT DISPONIBLE</p>
 
-                            <div class="relative z-10 grid grid-cols-2 gap-4 px-10">
-                                <div class="text-center">
-                                    <span class="block text-[8px] font-black text-white/30 uppercase tracking-[0.2em] mb-1">INDICE_F</span>
-                                    <span class="text-emerald-400 font-black text-lg">{{ $sample->result->confidence_score }}%</span>
+                                <div class="relative z-10 mb-8">
+                                    @if($sample->result->sex_result == 'Male')
+                                        <div class="inline-flex w-24 h-24 bg-indigo-600 rounded-full items-center justify-center text-white text-5xl shadow-[0_0_50px_rgba(79,70,229,0.4)] font-black">♂</div>
+                                        <h3 class="mt-6 text-slate-900 font-outfit font-black text-5xl tracking-tighter uppercase italic">MÂLE</h3>
+                                    @elseif($sample->result->sex_result == 'Female')
+                                        <div class="inline-flex w-24 h-24 bg-pink-500 rounded-full items-center justify-center text-white text-5xl shadow-[0_0_50px_rgba(236,72,153,0.4)] font-black">♀</div>
+                                        <h3 class="mt-6 text-slate-900 font-outfit font-black text-5xl tracking-tighter uppercase italic">FEMELLE</h3>
+                                    @else
+                                        <div class="inline-flex w-24 h-24 bg-slate-700 rounded-full items-center justify-center text-white text-5xl font-black">?</div>
+                                        <h3 class="mt-6 text-slate-900 font-outfit font-black text-4xl tracking-tighter uppercase italic">NON CONCLUANT</h3>
+                                    @endif
                                 </div>
-                                <div class="text-center">
-                                    <span class="block text-[8px] font-black text-white/30 uppercase tracking-[0.2em] mb-1">PROTO_X</span>
-                                    <span class="text-indigo-400 font-black text-lg uppercase tracking-tighter">CERTIFIED</span>
+
+                                <div class="relative z-10 grid grid-cols-2 gap-4 px-10">
+                                    <div class="text-center">
+                                        <span class="block text-[8px] font-black text-slate-500 uppercase tracking-[0.2em] mb-1">Confiance</span>
+                                        <span class="text-emerald-700 font-black text-lg">{{ $sample->result->confidence_score }}%</span>
+                                    </div>
+                                    <div class="text-center">
+                                        <span class="block text-[8px] font-black text-slate-500 uppercase tracking-[0.2em] mb-1">Qualité</span>
+                                        <span class="text-indigo-700 font-black text-lg uppercase tracking-tighter">{{ $sample->result->quality_check == 'Good' ? 'PREMIUM' : 'LOW' }}</span>
+                                    </div>
+                                </div>
+
+                                @if($sample->result->comment)
+                                    <div class="mt-10 mx-auto max-w-2xl bg-white/90 text-slate-900 p-6 rounded-[2rem] border border-emerald-100">
+                                        <p class="text-sm italic">"{{ $sample->result->comment }}"</p>
+                                    </div>
+                                @endif
+
+                                <div class="mt-12">
+                                    <a href="{{ route('client.sample.pdf', $sample->id) }}" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-slate-900 text-white text-xs font-black uppercase tracking-[0.2em] hover:bg-slate-800 transition">
+                                        Télécharger le rapport PDF
+                                    </a>
                                 </div>
                             </div>
-                        </div>
+                        @else
+                            <div class="text-center py-16">
+                                <div class="relative w-20 h-20 mx-auto mb-8">
+                                    <div class="absolute inset-0 border-4 border-white/5 rounded-full"></div>
+                                    <div class="absolute inset-0 border-4 border-amber-500 rounded-full border-t-transparent animate-spin"></div>
+                                    <svg class="absolute inset-0 m-auto h-8 w-8 text-amber-400/50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                    </svg>
+                                </div>
+                                <h4 class="text-xl font-black text-white font-outfit uppercase italic tracking-tight italic">Rapport bloqué</h4>
+                                <p class="mt-3 text-[10px] text-white/30 uppercase tracking-[0.2em] font-bold">Le rapport est prêt, mais l’accès client n’est pas encore autorisé.</p>
+                            </div>
+                        @endif
                     @else
                         <div class="text-center py-16">
                             <div class="relative w-20 h-20 mx-auto mb-8">
@@ -121,8 +147,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-xl font-black text-white font-outfit uppercase italic tracking-tight italic">Compute Sequence...</h4>
-                            <p class="mt-3 text-[10px] text-white/30 uppercase tracking-[0.2em] font-bold">Extraction ADN en cours</p>
+                            <h4 class="text-xl font-black text-white font-outfit uppercase italic tracking-tight italic">Analyse en cours</h4>
+                            <p class="mt-3 text-[10px] text-white/30 uppercase tracking-[0.2em] font-bold">Le prélèvement est toujours en cours de traitement en laboratoire.</p>
                         </div>
                     @endif
                 </div>

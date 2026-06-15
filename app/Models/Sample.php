@@ -10,7 +10,7 @@ class Sample extends Model
     use HasFactory;
 
     protected $fillable = [
-        'qr_code', 'user_id', 'species_id', 'sample_type', 'quantity', 'status', 'is_paid', 'payment_required', 'notes', 'pre_scan_image_path'
+        'qr_code', 'user_id', 'species_id', 'sample_type', 'quantity', 'status', 'is_paid', 'payment_required', 'client_access_granted', 'notes', 'pre_scan_image_path'
     ];
 
     public function user()

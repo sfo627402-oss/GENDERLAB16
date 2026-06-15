@@ -8,115 +8,147 @@
 
     <div class="py-12 bg-slate-50">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                
-                <!-- Main Content -->
-                <div class="lg:col-span-2 space-y-8">
-                    
-                    <!-- Tutorial Video Section -->
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+                <div class="xl:col-span-2 space-y-8">
                     <div class="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden relative">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-bio-500/5 rounded-full blur-2xl"></div>
-                        <h3 class="text-xl font-bold font-outfit text-slate-800 mb-6 flex items-center gap-2">
-                            <svg class="w-6 h-6 text-bio-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                            Tutoriels Vidéo
-                        </h3>
-                        
-                        <div class="aspect-video bg-slate-900 rounded-3xl relative overflow-hidden group border-4 border-slate-50 shadow-inner cursor-pointer">
-                            <img src="https://picsum.photos/id/10/1200/800" class="w-full h-full object-cover opacity-50 transition duration-500 group-hover:scale-110" alt="Video Placeholder">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-2xl transition group-hover:scale-110">
-                                    <svg class="w-10 h-10 text-bio-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                                </div>
+                        <div class="absolute top-0 right-0 w-36 h-36 bg-bio-500/10 rounded-full blur-3xl"></div>
+                        <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                            <div class="max-w-2xl">
+                                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-bio-100 text-bio-700 text-xs font-black uppercase tracking-[0.35em] mb-4">Guide du Prélèvement</span>
+                                <h3 class="text-3xl font-black font-outfit text-slate-900 mb-4">Préparez et envoyez vos échantillons en toute confiance</h3>
+                                <p class="text-slate-500 text-base leading-relaxed">Suivez les meilleures pratiques de prélèvement, emballez votre matériel correctement et bénéficiez de l'assistance IA dédiée pour une analyse rapide et fiable.</p>
                             </div>
-                            <div class="absolute bottom-6 left-6 text-white font-bold text-lg drop-shadow-md">
-                                Comment prélever des plumes (Gris du Gabon)
+                            <div class="rounded-[2rem] border border-slate-200 bg-slate-100 p-6 shadow-sm max-w-sm">
+                                <p class="text-sm uppercase tracking-[0.3em] text-slate-500 font-bold mb-4">Étape rapide</p>
+                                <ul class="space-y-3 text-slate-600 text-sm">
+                                    <li>Choix d'échantillon</li>
+                                    <li>Emballage sécurisé</li>
+                                    <li>Étiquette QR</li>
+                                    <li>Envoi suivi</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Step by Step Section -->
                     <div class="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100">
-                        <h3 class="text-xl font-bold font-outfit text-slate-800 mb-8">Protocole de Prélèvement Certifié</h3>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <h3 class="text-2xl font-bold font-outfit text-slate-900 mb-6">Protocole de prélèvement certifié</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div class="space-y-6">
                                 <div class="flex gap-4">
-                                    <div class="w-10 h-10 bg-bio-100 text-bio-600 rounded-xl flex items-center justify-center font-black shrink-0">1</div>
+                                    <div class="w-11 h-11 rounded-2xl bg-bio-100 text-bio-700 flex items-center justify-center font-black">1</div>
                                     <div>
-                                        <h4 class="font-bold text-slate-800">Sélection</h4>
-                                        <p class="text-slate-500 text-sm">Choisissez 3 à 5 plumes fraîches au niveau du thorax. Ne pas utiliser de plumes tombées au sol.</p>
+                                        <h4 class="font-semibold text-slate-900">Préparez l'échantillon</h4>
+                                        <p class="text-slate-500 text-sm">Sélectionnez 3 à 5 plumes propres, fraîches et intactes. Pas de plumes tombées au sol.</p>
                                     </div>
                                 </div>
                                 <div class="flex gap-4">
-                                    <div class="w-10 h-10 bg-bio-100 text-bio-600 rounded-xl flex items-center justify-center font-black shrink-0">2</div>
+                                    <div class="w-11 h-11 rounded-2xl bg-bio-100 text-bio-700 flex items-center justify-center font-black">2</div>
                                     <div>
-                                        <h4 class="font-bold text-slate-800">Séchage & Emballage</h4>
-                                        <p class="text-slate-500 text-sm">Placez les plumes dans un sachet zip propre et sec. Ne pas utiliser de coton humide.</p>
+                                        <h4 class="font-semibold text-slate-900">Séchez et protégez</h4>
+                                        <p class="text-slate-500 text-sm">Mettez l'échantillon dans un sachet zip propre et sec. Ajoutez un calage pour éviter les chocs.</p>
                                     </div>
                                 </div>
                                 <div class="flex gap-4">
-                                    <div class="w-10 h-10 bg-bio-100 text-bio-600 rounded-xl flex items-center justify-center font-black shrink-0">3</div>
+                                    <div class="w-11 h-11 rounded-2xl bg-bio-100 text-bio-700 flex items-center justify-center font-black">3</div>
                                     <div>
-                                        <h4 class="font-bold text-slate-800">Identification QR</h4>
-                                        <p class="text-slate-500 text-sm">Collez l'étiquette générée sur le sachet. Assurez-vous que le code QR est bien lisible.</p>
+                                        <h4 class="font-semibold text-slate-900">Identifiez le prélèvement</h4>
+                                        <p class="text-slate-500 text-sm">Collez le QR code fourni sur le sachet. Vérifiez qu'il reste lisible et intact.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="relative">
-                                <img src="{{ asset('images/collection_feathers.png') }}" class="rounded-3xl shadow-lg border-4 border-slate-50" alt="Guide">
-                                <div class="absolute -bottom-4 -right-4 bg-white p-3 rounded-2xl shadow-xl border border-slate-100">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">MÉTHODE APP DE L'IA</span>
-                                    </div>
+                            <div class="relative rounded-[2rem] overflow-hidden border border-slate-100 shadow-lg">
+                                <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=900&q=80" alt="Échantillon" class="w-full h-full object-cover min-h-[320px]">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                                <div class="absolute bottom-6 left-6 text-white">
+                                    <h4 class="text-lg font-bold">Protégez votre échantillon</h4>
+                                    <p class="text-sm text-white/80">Utilisez des sacs propres et un colis rigide.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100">
+                        <h3 class="text-2xl font-bold font-outfit text-slate-900 mb-6">Expédition & réception</h3>
+                        <div class="space-y-5 text-slate-600 text-sm leading-relaxed">
+                            <p>Choisissez un transporteur recommandé et conservez votre numéro de suivi. Le laboratoire reçoit et enregistre votre colis sous 24h pour lancer l'analyse rapidement.</p>
+                            <p>Ajoutez une notice interne avec le nom de l'espèce et le numéro de prélèvement. Assurez-vous que le colis est étiqueté comme matériel biologique non dangereux.</p>
+                        </div>
+                        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+                            <div class="rounded-3xl bg-slate-50 p-5 border border-slate-100">
+                                <p class="text-sm font-semibold text-slate-900 mb-2">À faire</p>
+                                <ul class="space-y-2 text-slate-500 text-sm">
+                                    <li>Conserver au sec</li>
+                                    <li>Suivre la fiche de prélèvement</li>
+                                    <li>Vérifier le QR code</li>
+                                </ul>
+                            </div>
+                            <div class="rounded-3xl bg-slate-50 p-5 border border-slate-100">
+                                <p class="text-sm font-semibold text-slate-900 mb-2">À éviter</p>
+                                <ul class="space-y-2 text-slate-500 text-sm">
+                                    <li>Chaleur excessive</li>
+                                    <li>Sachet humide</li>
+                                    <li>QR code plié</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Sidebar / AI Chat -->
-                <div class="space-y-8">
-                    
-                    <!-- AI Assistant Chat -->
+                <div class="space-y-8" x-data="{
+                        draft: '',
+                        messages: [
+                            { id: 1, role: 'assistant', text: 'Bonjour ! Posez-moi vos questions de prélèvement, et je vous guide pas à pas.' },
+                            { id: 2, role: 'user', text: 'Est-ce que je peux ajouter plusieurs espèces dans le même colis ?' },
+                            { id: 3, role: 'assistant', text: 'Non, chaque espèce doit être envoyée dans un colis séparé avec son propre QR code pour éviter toute confusion d’analyse.' }
+                        ],
+                        send() {
+                            if (!this.draft.trim()) return;
+                            this.messages.push({ id: Date.now(), role: 'user', text: this.draft });
+                            const question = this.draft;
+                            this.draft = '';
+                            const answer = this.createAnswer(question);
+                            setTimeout(() => {
+                                this.messages.push({ id: Date.now() + 1, role: 'assistant', text: answer });
+                                this.$nextTick(() => {
+                                    this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight;
+                                });
+                            }, 350);
+                        },
+                        createAnswer(question) {
+                            const normalized = question.toLowerCase();
+                            if (normalized.includes('plume') || normalized.includes('espèce')) {
+                                return 'Pour chaque espèce, envoyez un colis séparé avec un QR code distinct pour garantir la traçabilité.';
+                            }
+                            if (normalized.includes('qrcode') || normalized.includes('qr')) {
+                                return 'Assurez-vous que le QR code reste propre et bien collé au sachet avant l’envoi.';
+                            }
+                            if (normalized.includes('délai') || normalized.includes('jours')) {
+                                return 'Envoyez le prélèvement sous 48 heures et conservez le colis à l’abri de l’humidité et de la chaleur.';
+                            }
+                            return 'Je vous recommande de suivre le protocole : échantillon propre, sachet sec, QR code lisible et envoi suivi.';
+                        }
+                    }">
                     <div class="bg-indigo-950 rounded-[2.5rem] shadow-2xl p-6 text-white overflow-hidden relative group">
-                        <!-- Decorative background light -->
                         <div class="absolute top-0 right-0 w-32 h-32 bg-bio-400/10 rounded-full blur-2xl group-hover:bg-bio-400/20 transition duration-500"></div>
-                        
-                        <div class="relative z-10 flex flex-col h-[500px]">
+                        <div class="relative z-10 flex flex-col h-[520px]">
                             <div class="flex items-center gap-3 mb-6">
-                                <div class="w-10 h-10 bg-gradient-to-br from-bio-400 to-indigo-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                                <div class="w-11 h-11 bg-gradient-to-br from-bio-400 to-indigo-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
                                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-black font-outfit text-lg">Assistant GenDer Lab</h3>
+                                    <h3 class="font-black font-outfit text-lg">Assistant de laboratoire</h3>
                                     <p class="text-[10px] text-bio-400 font-bold uppercase tracking-widest">En ligne • IA Biologiste</p>
                                 </div>
                             </div>
-
-                            <!-- Chat Messages (Simulated) -->
-                            <div class="flex-1 overflow-y-auto space-y-4 mb-6 pr-2 custom-scrollbar">
-                                <div class="bg-white/10 p-4 rounded-2xl rounded-tl-none text-sm text-white/80 border border-white/5">
-                                    Bonjour ! Je suis l'IA de GenDer Lab. Comment puis-je vous aider dans votre prélèvement aujourd'hui ?
-                                </div>
-                                <div class="bg-bio-500/20 p-4 rounded-2xl rounded-tr-none text-sm text-bio-100 border border-bio-500/20 self-end ml-8">
-                                    Quelles plumes dois-je prendre pour un perroquet ?
-                                </div>
-                                <div class="bg-white/10 p-4 rounded-2xl rounded-tl-none text-sm text-white/80 border border-white/5">
-                                    Pour un perroquet, l'idéal est de prélever 4 à 5 petites plumes au niveau de la poitrine ou du bas de l'aile. Évitez les grandes plumes de vol qui sont trop douloreuses à retirer.
-                                </div>
-                                <div class="bg-white/10 p-4 rounded-2xl rounded-tl-none text-sm text-white/80 border border-white/5">
-                                    N'oubliez pas de bien photographier l'échantillon via l'IA de vérification avant scellage !
-                                </div>
+                            <div x-ref="messages" x-init="$watch('messages', () => { $nextTick(() => { $refs.messages.scrollTop = $refs.messages.scrollHeight; }); })" class="flex-1 overflow-y-auto space-y-4 mb-6 pr-2 custom-scrollbar">
+                                <template x-for="message in messages" :key="message.id">
+                                    <div :class="message.role === 'user' ? 'bg-bio-500/20 p-4 rounded-2xl text-sm text-bio-100 border border-bio-500/20 self-end ml-8' : 'bg-white/10 p-4 rounded-2xl text-sm text-white/80 border border-white/5'" x-text="message.text"></div>
+                                </template>
                             </div>
-
-                            <!-- Input -->
                             <div class="mt-auto">
                                 <div class="relative">
-                                    <input type="text" placeholder="Posez votre question..." class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-5 pr-12 text-sm text-white focus:outline-none focus:border-bio-400 focus:ring-1 focus:ring-bio-400 transition placeholder:text-white/20">
-                                    <button class="absolute right-3 top-3 w-8 h-8 bg-bio-500 rounded-xl flex items-center justify-center text-white hover:bg-bio-400 transition">
+                                    <input x-model="draft" @keydown.enter.prevent="send()" type="text" placeholder="Posez votre question..." class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-5 pr-12 text-sm text-white focus:outline-none focus:border-bio-400 focus:ring-1 focus:ring-bio-400 transition placeholder:text-white/20">
+                                    <button @click="send()" type="button" class="absolute right-3 top-3 w-8 h-8 bg-bio-500 rounded-xl flex items-center justify-center text-white hover:bg-bio-400 transition">
                                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
                                     </button>
                                 </div>
@@ -124,29 +156,25 @@
                         </div>
                     </div>
 
-                    <!-- Logistics Info -->
-                    <div class="bg-white p-6 rounded-[2rem] shadow-lg border border-slate-100">
-                        <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
-                            <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 012 2v1a2 2 0 01-2 2H4a2 2 0 01-2-2v-1a2 2 0 012-2m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
-                            Logistique & Envoi
-                        </h4>
-                        <ul class="text-sm text-slate-500 space-y-3">
-                            <li class="flex items-center gap-2">
-                                <div class="w-1.5 h-1.5 bg-bio-500 rounded-full"></div>
-                                Dépôt local (gratuit)
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <div class="w-1.5 h-1.5 bg-bio-500 rounded-full"></div>
-                                Envoi par courrier certifié (J+1)
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <div class="w-1.5 h-1.5 bg-bio-500 rounded-full"></div>
-                                Ramassage groupé éleveurs
-                            </li>
-                        </ul>
+                    <div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-xl p-8">
+                        <h4 class="text-xl font-bold text-slate-900 mb-5">Support express</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">Besoin d'aide pour votre prélèvement ou votre expédition ? Notre équipe est disponible pour vérifier vos photos et vous confirmer la conformité avant envoi.</p>
+                        <div class="space-y-4 text-sm text-slate-600">
+                            <div class="flex gap-3 items-start">
+                                <span class="mt-1 w-2 h-2 rounded-full bg-bio-500"></span>
+                                <p>Support par chat disponible 7j/7.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="mt-1 w-2 h-2 rounded-full bg-bio-500"></span>
+                                <p>Réponse en moins de 2 heures pour les prélèvements urgents.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="mt-1 w-2 h-2 rounded-full bg-bio-500"></span>
+                                <p>Accès direct à vos instructions depuis votre dashboard.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

@@ -27,6 +27,17 @@
 
             <form action="{{ route('client.store') }}" method="POST" id="submissionForm" enctype="multipart/form-data">
                 @csrf
+
+                @if($errors->any())
+                    <div class="mb-6 rounded-3xl border border-red-200 bg-red-50 p-5 text-red-700">
+                        <p class="font-black uppercase tracking-widest text-xs mb-3">Erreur de validation</p>
+                        <ul class="list-disc list-inside text-sm space-y-1">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 
                 <!-- STEP 1: ESPÈCE & TYPE -->
                 <div x-show="step === 1" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform translate-y-4" x-transition:enter-end="opacity-100 transform translate-y-0">
@@ -142,6 +153,10 @@
                             </div>
                         </label>
                     </div>
+
+                    @error('delivery_method')
+                        <p class="text-red-500 text-sm font-bold uppercase tracking-widest mb-4">{{ $message }}</p>
+                    @enderror
 
                     <div class="flex justify-between items-center mt-12 bg-slate-50 -mx-12 -mb-12 p-10 rounded-b-[2.5rem]">
                         <button type="button" @click="step = 2" class="text-slate-400 hover:text-slate-800 font-black text-xs uppercase tracking-widest transition">Retour</button>

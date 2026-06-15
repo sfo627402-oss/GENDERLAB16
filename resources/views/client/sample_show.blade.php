@@ -114,38 +114,17 @@
                             </div>
 
                             @if($sample->status === 'Completed' && $sample->result)
-                                @if($sample->payment_required && !$sample->is_paid)
-                                    <div class="bg-indigo-100 rounded-[2rem] p-8 border border-indigo-200 text-indigo-900 mb-8">
-                                        <div class="text-sm font-black uppercase tracking-[0.2em] mb-3">Paiement requis</div>
-                                        <p class="text-sm leading-relaxed">
-                                            Votre analyse est terminée. Le paiement est nécessaire pour accéder au rapport complet.
-                                        </p>
-                                        <form action="{{ route('client.sample.pay', $sample->id) }}" method="POST" class="mt-6">
-                                            @csrf
-                                            <button type="submit" class="bg-slate-900 hover:bg-indigo-600 text-white font-black text-[10px] uppercase tracking-[0.2em] px-8 py-4 rounded-2xl shadow-xl transition active:scale-95">
-                                                Je paie maintenant
-                                            </button>
-                                        </form>
-                                    </div>
-                                @elseif($sample->payment_required && $sample->is_paid)
-                                    <div class="bg-emerald-100 rounded-[2rem] p-8 border border-emerald-200 text-emerald-900 mb-8">
-                                        <div class="text-sm font-black uppercase tracking-[0.2em] mb-3">Paiement reçu</div>
-                                        <p class="text-sm leading-relaxed">
-                                            Le paiement a été validé. Vous pouvez maintenant télécharger le certificat.
-                                        </p>
-                                    </div>
-                                @else
+                                @if($sample->client_access_granted)
                                     <div class="bg-emerald-100 rounded-[2rem] p-8 border border-emerald-200 text-emerald-900 mb-8">
                                         <div class="text-sm font-black uppercase tracking-[0.2em] mb-3">Analyse gratuite</div>
                                         <p class="text-sm leading-relaxed">
                                             Ce prélèvement est offert. Le rapport est disponible immédiatement.
                                         </p>
                                     </div>
-                                @endif
 
-                                <div class="text-center py-10">
-                                        <div class="relative inline-block mb-10">
-                                            @if($sample->result->sex_result == 'Male')
+                                    <div class="text-center py-10">
+                                            <div class="relative inline-block mb-10">
+                                                @if($sample->result->sex_result == 'Male')
                                                 <div class="w-40 h-40 bg-indigo-600 rounded-full flex items-center justify-center text-white text-6xl shadow-2xl shadow-indigo-600/40 relative z-10 font-black">♂</div>
                                                 <div class="absolute -inset-4 bg-indigo-600/20 rounded-full animate-ping opacity-20"></div>
                                             @elseif($sample->result->sex_result == 'Female')
@@ -184,19 +163,48 @@
                                             </a>
                                         </div>
                                     </div>
-                            @else
-                                <div class="py-24 text-center relative z-10 flex flex-col items-center">
-                                    <div class="w-32 h-32 bg-slate-50 rounded-full flex items-center justify-center mb-10 relative">
-                                        <div class="absolute inset-0 border-4 border-indigo-500 rounded-full border-t-transparent animate-spin"></div>
-                                        <svg class="h-10 w-10 text-indigo-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
-                                        </svg>
+                                @else
+                                    <div class="py-24 text-center relative z-10 flex flex-col items-center">
+                                        <div class="w-32 h-32 bg-slate-50 rounded-full flex items-center justify-center mb-10 relative">
+                                            <div class="absolute inset-0 border-4 border-slate-400 rounded-full border-t-transparent animate-spin"></div>
+                                            <svg class="h-10 w-10 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                            </svg>
+                                        </div>
+                                        <h4 class="text-2xl font-black font-outfit uppercase tracking-tight italic">Accès restreint</h4>
+                                        <p class="mt-4 text-sm text-slate-400 max-w-sm font-medium leading-relaxed">
+                                            Le rapport existe mais l’accès n’est pas encore autorisé par l’administrateur. Aucun détail d’analyse n’est affiché pour le moment.
+                                        </p>
                                     </div>
-                                    <h4 class="text-2xl font-black font-outfit uppercase tracking-tight italic">Séquençage En Cours</h4>
-                                    <p class="mt-4 text-sm text-slate-400 max-w-sm font-medium leading-relaxed">
-                                        L'échantillon subit actuellement une amplification PCR. Temps estimé : 24-48h.
-                                    </p>
-                                </div>
+                                @endif
+                            @else
+                                @if($sample->client_access_granted)
+                                    <div class="py-24 text-center relative z-10 flex flex-col items-center">
+                                        <div class="w-32 h-32 bg-slate-50 rounded-full flex items-center justify-center mb-10 relative">
+                                            <div class="absolute inset-0 border-4 border-emerald-500 rounded-full border-t-transparent animate-spin"></div>
+                                            <svg class="h-10 w-10 text-emerald-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                            </svg>
+                                        </div>
+                                        <h4 class="text-2xl font-black font-outfit uppercase tracking-tight italic">Accès autorisé</h4>
+                                        <p class="mt-4 text-sm text-slate-400 max-w-sm font-medium leading-relaxed">
+                                            Votre administrateur a déjà autorisé l’accès. L’analyse est toujours en cours, les résultats seront disponibles dès qu’elle sera terminée.
+                                        </p>
+                                    </div>
+                                @else
+                                    <div class="py-24 text-center relative z-10 flex flex-col items-center">
+                                        <div class="w-32 h-32 bg-slate-50 rounded-full flex items-center justify-center mb-10 relative">
+                                            <div class="absolute inset-0 border-4 border-indigo-500 rounded-full border-t-transparent animate-spin"></div>
+                                            <svg class="h-10 w-10 text-indigo-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                            </svg>
+                                        </div>
+                                        <h4 class="text-2xl font-black font-outfit uppercase tracking-tight italic">Analyse en cours</h4>
+                                        <p class="mt-4 text-sm text-slate-400 max-w-sm font-medium leading-relaxed">
+                                            Votre nouveau test est en cours de traitement. Merci de revenir bientôt pour consulter les résultats.
+                                        </p>
+                                    </div>
+                                @endif
                             @endif
                         </div>
                     </div>

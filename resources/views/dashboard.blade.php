@@ -119,11 +119,7 @@
                                             </td>
                                             <td class="px-8 py-6 whitespace-nowrap text-sm text-slate-900 font-black font-outfit tracking-tighter italic">
                                                 @if($sample->status === 'Completed' && $sample->result)
-                                                    @if(!$sample->is_paid)
-                                                        <span class="text-orange-500 text-[10px] uppercase font-black tracking-widest bg-orange-50 px-3 py-1.5 rounded-lg border border-orange-100">Paiement à la livraison</span>
-                                                    @else
-                                                        <span class="text-indigo-600">{{ $sample->result->sex_result }}</span>
-                                                    @endif
+                                                    <span class="text-indigo-600">{{ $sample->result->sex_result }}</span>
                                                 @else
                                                     <span class="text-slate-300 font-normal tracking-widest">...</span>
                                                 @endif
@@ -165,11 +161,7 @@
                                     <div class="text-[10px] font-black text-slate-400 uppercase tracking-widest">VERDICT ADN</div>
                                     <div class="font-black text-indigo-600 font-outfit text-lg tracking-tight italic uppercase">
                                         @if($sample->status === 'Completed' && $sample->result)
-                                            @if(!$sample->is_paid)
-                                                PAIEMENT À LA LIVRAISON
-                                            @else
-                                                {{ $sample->result->sex_result }}
-                                            @endif
+                                            {{ $sample->result->sex_result }}
                                         @else
                                             IN PROGRESS
                                         @endif

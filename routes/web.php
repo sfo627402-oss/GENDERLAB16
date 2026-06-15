@@ -27,7 +27,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/submit', [ClientController::class, 'submitForm'])->name('submit');
         Route::post('/submit', [ClientController::class, 'storeSample'])->name('store');
         Route::get('/sample/{id}', [ClientController::class, 'showSample'])->name('sample.show');
-        Route::post('/sample/{id}/pay', [ClientController::class, 'simulatePayment'])->name('sample.pay');
         Route::get('/sample/{id}/pdf', [ClientController::class, 'printReport'])->name('sample.pdf');
     });
 
@@ -43,6 +42,8 @@ Route::middleware('auth')->group(function () {
     // Admin Routes
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::post('/sample/{id}/access', [AdminController::class, 'toggleClientAccess'])->name('sample.access');
+        Route::delete('/sample/{id}', [AdminController::class, 'destroySample'])->name('sample.destroy');
     });
 });
 

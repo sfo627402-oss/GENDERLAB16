@@ -68,9 +68,8 @@ class BiologistController extends Controller
             'sex_result' => 'required|in:Male,Female,Inconclusive',
             'confidence_score' => 'required|integer|min:0|max:100',
             'quality_check' => 'required|in:Good,Bad',
-            'payment_required' => 'required|in:0,1',
             'comment' => 'nullable|string',
-            'gel_image' => 'nullable|image|max:2048' // Max 2MB Image
+            'gel_image' => 'nullable|mimes:jpg,jpeg,png,gif,tiff|max:5120' // Max 5MB Image
         ]);
 
         $sample = Sample::findOrFail($id);
@@ -100,7 +99,7 @@ class BiologistController extends Controller
 
         $sample->update([
             'status' => 'Completed',
-            'payment_required' => $request->payment_required,
+            'payment_required' => false,
         ]);
 
         return back()->with('success', 'Analyse sauvegardée. L\'échantillon est marqué comme complété.');
