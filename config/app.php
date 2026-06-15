@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://genderlab02.onrender.com'),
+    'url' => env('APP_URL', 'https://genderlab16.onrender.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'asset_url' => env('ASSET_URL', env('APP_URL', 'https://genderlab02.onrender.com')),
+    'asset_url' => env('ASSET_URL', env('APP_URL', 'https://genderlab16.onrender.com')),
 
     /*
     |--------------------------------------------------------------------------
