@@ -43,6 +43,7 @@ RUN npm install
 RUN mkdir -p database && touch database/database.sqlite && chmod 777 database/database.sqlite
 
 # Fixer les permissions
+RUN mkdir -p storage/app/public storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs
 RUN chown -R www-data:www-data storage bootstrap/cache database
 
 # Configurer Apache
