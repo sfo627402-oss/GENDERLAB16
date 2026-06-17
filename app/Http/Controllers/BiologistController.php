@@ -64,24 +64,50 @@ class BiologistController extends Controller
 
     public function submitAnalysis(Request $request, $id)
     {
+        $gelImageRules = ['nullable', 'file', 'max:5120'];
+
+        if (extension_loaded('fileinfo')) {
+            $gelImageRules[] = 'mimes:jpg,jpeg,png,gif,tiff';
+        } else {
+            $gelImageRules[] = function ($attribute, $value, $fail) {
+                $allowed = ['jpg', 'jpeg', 'png', 'gif', 'tiff'];
+                $extension = strtolower($value->getClientOriginalExtension());
+
+                if (!in_array($extension, $allowed, true)) {
+                    $fail('Le fichier doit être une image valide de type JPG, JPEG, PNG, GIF ou TIFF.');
+                }
+            };
+        }
+
         $request->validate([
             'sex_result' => 'required|in:Male,Female,Inconclusive',
             'confidence_score' => 'required|integer|min:0|max:100',
             'quality_check' => 'required|in:Good,Bad',
             'comment' => 'nullable|string',
-            'gel_image' => 'nullable|mimes:jpg,jpeg,png,gif,tiff|max:5120' // Max 5MB Image
+            'gel_image' => $gelImageRules
         ]);
 
         $sample = Sample::findOrFail($id);
         
         $gelImagePath = optional($sample->result)->gel_image_path;
 
-        if ($request->hasFile('gel_image')) {
+        if ($request->hasFile('gel_image') && $request->file('gel_image')->isValid()) {
             // Delete old if exists
             if ($gelImagePath) {
                 Storage::disk('public')->delete($gelImagePath);
             }
-            $gelImagePath = $request->file('gel_image')->store('gels', 'public');
+
+            $gelImage = $request->file('gel_image');
+            $extension = strtolower($gelImage->getClientOriginalExtension());
+            $filename = uniqid('gel_', true) . '.' . $extension;
+            $targetDir = storage_path('app/public/gels');
+
+            if (!file_exists($targetDir)) {
+                mkdir($targetDir, 0755, true);
+            }
+
+            $gelImage->move($targetDir, $filename);
+            $gelImagePath = 'gels/' . $filename;
         }
         
         $result = Result::updateOrCreate(
